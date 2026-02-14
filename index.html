@@ -954,10 +954,7 @@
             <span class="material-icons-round nav-icon">home</span>
             <span class="nav-label">Home</span>
         </div>
-        <div class="nav-item" onclick="showSection('story')">
-            <span class="material-icons-round nav-icon">auto_stories</span>
-            <span class="nav-label">La nostra storia</span>
-        </div>
+
         <div class="nav-item" onclick="showSection('gallery')">
             <span class="material-icons-round nav-icon">photo_library</span>
             <span class="nav-label">Galleria</span>
@@ -983,14 +980,10 @@
                 document.querySelectorAll('.nav-item')[0].classList.add('active');
             } else if (section === 'gallery') {
                 document.getElementById('gallery-section').classList.add('active');
-                document.querySelectorAll('.nav-item')[2].classList.add('active');
-            } else if (section === 'story') {
-                alert('¡Próximamente! La nostra storia bellissima continua... 💕');
-                document.querySelectorAll('.nav-item')[0].classList.add('active');
+                document.querySelectorAll('.nav-item')[1].classList.add('active');
             } else if (section === 'surprise') {
-                // alert('¡Sorpresa especial! Ti amo più di ogni cosa, Denise! 🎁💕');
                 document.getElementById('surprise-section').classList.add('active');
-                document.querySelectorAll('.nav-item')[3].classList.add('active');
+                document.querySelectorAll('.nav-item')[2].classList.add('active');
             }
 
             // Scroll to top
