@@ -101,6 +101,18 @@
             transform: scale(-1);
         }
 
+        .floral-corner.mid-left {
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+        }
+
+        .floral-corner.mid-right {
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%) scaleX(-1);
+        }
+
         .container {
             position: relative;
             z-index: 10;
@@ -635,17 +647,32 @@
 <body>
     <!-- Animated Petals -->
     <div class="petal" style="left: 10%; animation-duration: 8s; animation-delay: 0s;"></div>
+    <div class="petal" style="left: 20%; animation-duration: 12s; animation-delay: 1.5s;"></div>
     <div class="petal" style="left: 25%; animation-duration: 10s; animation-delay: 2s;"></div>
+    <div class="petal" style="left: 35%; animation-duration: 14s; animation-delay: 0.5s;"></div>
     <div class="petal" style="left: 40%; animation-duration: 12s; animation-delay: 4s;"></div>
+    <div class="petal" style="left: 50%; animation-duration: 11s; animation-delay: 2.5s;"></div>
     <div class="petal" style="left: 60%; animation-duration: 9s; animation-delay: 1s;"></div>
+    <div class="petal" style="left: 70%; animation-duration: 13s; animation-delay: 3.5s;"></div>
     <div class="petal" style="left: 75%; animation-duration: 11s; animation-delay: 3s;"></div>
+    <div class="petal" style="left: 85%; animation-duration: 10s; animation-delay: 1.2s;"></div>
     <div class="petal" style="left: 90%; animation-duration: 13s; animation-delay: 5s;"></div>
+    <div class="petal" style="left: 5%; animation-duration: 15s; animation-delay: 4.5s;"></div>
+    <div class="petal" style="left: 95%; animation-duration: 12s; animation-delay: 2.8s;"></div>
+    <div class="petal" style="left: 15%; animation-duration: 14s; animation-delay: 5s;"></div>
+    <div class="petal" style="left: 45%; animation-duration: 10s; animation-delay: 1.5s;"></div>
+    <div class="petal" style="left: 55%; animation-duration: 13s; animation-delay: 3.2s;"></div>
+    <div class="petal" style="left: 65%; animation-duration: 11s; animation-delay: 0.8s;"></div>
+    <div class="petal" style="left: 80%; animation-duration: 16s; animation-delay: 4.2s;"></div>
 
     <!-- Floral Corner Frames -->
     <div class="floral-corner top-left"></div>
     <div class="floral-corner top-right"></div>
     <div class="floral-corner bottom-left"></div>
     <div class="floral-corner bottom-right"></div>
+    <div class="floral-corner mid-left"></div>
+    <div class="floral-corner mid-right"></div>
+
 
     <!-- Main Container -->
     <div class="container">
@@ -666,7 +693,7 @@
             </div>
 
             <div class="hero">
-                <img src="assets/denise-portrait.png" alt="Denise - Anime Style" class="hero-image">
+                <img src="assets/principal.png" alt="Denise - Anime Style" class="hero-image">
 
                 <h1 class="hero-title">Buon San Valentino,<br>Denise!</h1>
                 <p class="hero-subtitle">Giocatrice 1 è entrata nel mio cuore.<br>Premi start per continuare la nostra
@@ -830,13 +857,13 @@
 
         function changeImage(direction) {
             currentImageIndex += direction;
-            
+
             if (currentImageIndex < 0) {
                 currentImageIndex = totalImages - 1;
             } else if (currentImageIndex >= totalImages) {
                 currentImageIndex = 0;
             }
-            
+
             updateGallery();
         }
 
@@ -869,7 +896,7 @@
         }
 
         // Add keyboard navigation
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function (e) {
             if (document.getElementById('gallery-section').classList.contains('active')) {
                 if (e.key === 'ArrowLeft') {
                     changeImage(-1);
@@ -883,11 +910,11 @@
         let touchStartX = 0;
         let touchEndX = 0;
 
-        document.addEventListener('touchstart', function(e) {
+        document.addEventListener('touchstart', function (e) {
             touchStartX = e.changedTouches[0].screenX;
         });
 
-        document.addEventListener('touchend', function(e) {
+        document.addEventListener('touchend', function (e) {
             touchEndX = e.changedTouches[0].screenX;
             handleSwipe();
         });
