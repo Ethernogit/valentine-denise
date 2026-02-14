@@ -631,6 +631,104 @@
             .hero-title {
                 font-size: 36px;
             }
+        }
+
+        /* Surprise Section Styles */
+        .surprise-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            min-height: 60vh;
+        }
+
+        .gift-box-container {
+            cursor: pointer;
+            position: relative;
+            margin: 40px 0;
+            transition: transform 0.3s ease;
+        }
+
+        .gift-box-container:hover {
+            transform: scale(1.05);
+        }
+
+        .gift-box {
+            font-size: 100px;
+            animation: gift-bounce 2s infinite;
+        }
+
+        @keyframes gift-bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .click-hint {
+            margin-top: 10px;
+            font-size: 14px;
+            color: var(--soft-pink);
+            animation: pulse 1.5s infinite;
+        }
+
+        .surprise-content {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.8s ease;
+            display: none;
+            width: 100%;
+        }
+
+        .surprise-content.visible {
+            opacity: 1;
+            transform: scale(1);
+            display: block;
+        }
+
+        .gift-placeholder {
+            background: var(--glass-dark);
+            border: 2px dashed var(--primary-pink);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 20px;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .flower-particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1000;
+            font-size: 24px;
+            animation: flower-fall linear forwards;
+        }
+
+        @keyframes flower-fall {
+            0% {
+                transform: translateY(0) rotate(0deg) scale(0);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            100% {
+                transform: translateY(100vh) rotate(720deg) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+
+        @media (max-width: 480px) {
 
             .hero-image {
                 width: 180px;
@@ -805,6 +903,49 @@
                 </div>
             </div>
         </div>
+
+        <!-- Surprise Section -->
+        <div id="surprise-section" class="page-section">
+            <div class="jrpg-header">
+                <div class="level-badge">
+                    ❤️ LVL 24
+                </div>
+                <div class="player-tag">
+                    <div class="player-dot"></div>
+                    PLAYER 1: DENISE
+                </div>
+            </div>
+
+            <div class="surprise-container">
+                <h2 class="gallery-title">Una Sorpresa Speciale 🎁</h2>
+                <p class="hero-subtitle">C'è qualcosa di speciale per te...</p>
+
+                <div id="gift-container" class="gift-box-container" onclick="openGift()">
+                    <div class="gift-box">🎁</div>
+                    <div class="click-hint">Clicca per aprire!</div>
+                </div>
+
+                <div id="surprise-content" class="surprise-content">
+                    <div class="gift-reveal-container">
+                        <!-- Placeholder for future image -->
+                        <div class="gift-placeholder">
+                            <span class="material-icons-round"
+                                style="font-size: 48px; color: var(--primary-pink);">favorite</span>
+                            <p style="margin-top: 10px;">Presto vedrai il tuo regalo qui! 💕</p>
+                        </div>
+
+                        <div class="dialogue-box">
+                            <div class="speaker-tag">TU</div>
+                            <p class="dialogue-text">
+                                Spero che questa piccola sorpresa ti piaccia.
+                                Scritta con amore, solo per te.
+                                <span class="highlight">Buon San Valentino!</span> 🌹
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Bottom Navigation -->
@@ -847,8 +988,9 @@
                 alert('¡Próximamente! La nostra storia bellissima continua... 💕');
                 document.querySelectorAll('.nav-item')[0].classList.add('active');
             } else if (section === 'surprise') {
-                alert('¡Sorpresa especial! Ti amo più di ogni cosa, Denise! 🎁💕');
-                document.querySelectorAll('.nav-item')[0].classList.add('active');
+                // alert('¡Sorpresa especial! Ti amo più di ogni cosa, Denise! 🎁💕');
+                document.getElementById('surprise-section').classList.add('active');
+                document.querySelectorAll('.nav-item')[3].classList.add('active');
             }
 
             // Scroll to top
@@ -927,6 +1069,54 @@
                 if (touchEndX > touchStartX + 50) {
                     changeImage(-1);
                 }
+            }
+        }
+
+        // Surprise Functionality
+        function openGift() {
+            const giftContainer = document.getElementById('gift-container');
+            const surpriseContent = document.getElementById('surprise-content');
+
+            // Hide gift box with animation
+            giftContainer.style.transform = 'scale(0) rotate(180deg)';
+            setTimeout(() => {
+                giftContainer.style.display = 'none';
+                surpriseContent.classList.add('visible');
+            }, 500);
+
+            // Trigger flower explosion
+            createFlowerExplosion();
+        }
+
+        function createFlowerExplosion() {
+            const flowers = ['🌹', '🌸', '🌺', '🌷', '💐', '🌻', '✨', '💖'];
+            const container = document.body;
+
+            // Create 50 flowers
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const flower = document.createElement('div');
+                    flower.classList.add('flower-particle');
+                    flower.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+
+                    // Random start position (top half of screen)
+                    const startX = Math.random() * window.innerWidth;
+                    const startY = Math.random() * (window.innerHeight / 2);
+
+                    flower.style.left = startX + 'px';
+                    flower.style.top = startY + 'px';
+
+                    // Random animation duration
+                    const duration = 2 + Math.random() * 3;
+                    flower.style.animationDuration = duration + 's';
+
+                    container.appendChild(flower);
+
+                    // Remove after animation
+                    setTimeout(() => {
+                        flower.remove();
+                    }, duration * 1000);
+                }, i * 50); // Stagger creation
             }
         }
     </script>
